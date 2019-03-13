@@ -5,8 +5,12 @@ import * as mongoose from 'mongoose';
 export class ValidateObjectId implements PipeTransform<string> {
 
     async transform(value: string, metadata: ArgumentMetadata): Promise<string> {
-        const isValid = mongoose.Types.ObjectId.isValiad(value);
-        if (!isValid) throw new BadRequestException('Invalid Id!');
+        const isValid = mongoose.Types.ObjectId.isValid(value);
+
+        if (!isValid) {
+            throw new BadRequestException('Invalid Id!');
+        }
+
         return value;
     }
 
