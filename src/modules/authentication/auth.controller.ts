@@ -3,19 +3,17 @@ import { Controller, Post, Res, Req, Get } from '@nestjs/common';
 @Controller('authenticate')
 export class AuthController {
 
-    constructor(
-        // inject server here
-    ) { }
+    constructor(private readonly authService: AuthService) {}
 
-    @Get()
-    test() {
-        return 'response';
+    @Get('token')
+    async createToken(): Promise<any> {
+        return await this.authService.createToken()
     }
 
-    @Post()
-    async authenticateUser(@Req() req, @Res() res) {
-        console.log('hey')
-        return 'req received';
-    }
+    // @Post()
+    // async authenticateUser(@Req() req, @Res() res) {
+    //     console.log('hey')
+    //     return 'req received';
+    // }
 
 }
